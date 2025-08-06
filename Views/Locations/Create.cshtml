@@ -1,0 +1,106 @@
+@model Location
+
+@{
+    ViewData["Title"] = "Yeni Lokasyon Ekle";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Yeni Lokasyon Ekle</h1>
+                <p class="text-gray-600 mt-2">Sisteme yeni bir lokasyon ekleyin</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a asp-action="Index" class="btn-secondary">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Geri Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="form-card">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-red-800 font-medium">Lütfen aşağıdaki hataları düzeltin:</span>
+                    </div>
+                </div>
+
+                <!-- Lokasyon Bilgileri -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Lokasyon Bilgileri
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="form-group">
+                            <label asp-for="LineCodeId" class="form-label">Hat Kodu</label>
+                            <select asp-for="LineCodeId" class="form-input">
+                                <option value="">Hat Kodu 31Seçin</option>
+                                @foreach (var lineCode in ViewBag.LineCodes as IEnumerable<LineCode>)
+                                {
+                                    <option value="@lineCode.Id">@lineCode.Line</option>
+                                }
+                            </select>
+                            <span asp-validation-for="LineCodeId" class="form-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="LostItemId" class="form-label">Kayıp Eşya</label>
+                            <select asp-for="LostItemId" class="form-input">
+                                <option value="">Kayıp Eşya Seçin</option>
+                                @foreach (var lostItem in ViewBag.LostItems as IEnumerable<LostItem>)
+                                {
+                                    <option value="@lostItem.Id">@lostItem.ItemName</option>
+                                }
+                            </select>
+                            <span asp-validation-for="LostItemId" class="form-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="KapiID" class="form-label">Kapı Numarası</label>
+                            <input asp-for="KapiID" class="form-input" placeholder="Örn: A1, B2, C3" />
+                            <span asp-validation-for="KapiID" class="form-error"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+                    <a asp-action="Index" class="btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        İptal
+                    </a>
+                    <button type="submit" class="btn-primary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Kaydet
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

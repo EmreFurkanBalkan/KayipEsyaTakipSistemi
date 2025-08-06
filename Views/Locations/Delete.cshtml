@@ -1,0 +1,85 @@
+@model Location
+
+@{
+    ViewData["Title"] = "Lokasyon Sil";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold text-gray-900">Lokasyon Sil</h1>
+        <p class="mt-2 text-gray-600">Bu işlem geri alınamaz</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Warning Card -->
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+            <div class="flex items-center">
+                <svg class="w-8 h-8 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+                <div>
+                    <h3 class="text-lg font-semibold text-red-800">Silmek İstediğinizden Emin Misiniz?</h3>
+                    <p class="text-red-700 mt-1">Bu lokasyon kaydı kalıcı olarak silinecektir ve bu işlem geri alınamaz.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <!-- Location Information -->
+            <div class="mb-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-900">Silinecek Lokasyon</h2>
+                        <p class="text-gray-600">Aşağıdaki bilgilere sahip lokasyon kaydı silinecektir</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="detail-item">
+                        <label class="detail-label">Hat Kodu</label>
+                        <div class="detail-value">@Model.LineCode?.Line</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <label class="detail-label">Kayıp Eşya</label>
+                        <div class="detail-value">@Model.LostItem?.ItemName</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <label class="detail-label">Kapı Numarası</label>
+                        <div class="detail-value">@Model.KapiID</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <form asp-action="Delete" class="pt-6 border-t border-gray-200">
+                <input type="hidden" asp-for="Id" />
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button type="submit" class="btn-danger flex-1 sm:flex-none">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Evet, Sil
+                    </button>
+                    <a asp-action="Index" class="btn-secondary flex-1 sm:flex-none text-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        İptal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "Gizlilik Politikası";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold text-gray-900">Gizlilik Politikası</h1>
+        <p class="mt-2 text-gray-600">Kişisel verilerinizin korunması ve kullanımı hakkında bilgiler</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+            <div class="prose max-w-none">
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900">IETT Kayıp Eşya Sistemi</h2>
+                            <p class="text-gray-600">Gizlilik ve Veri Koruma Politikası</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <section>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">1. Veri Toplama ve Kullanım</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu sistem, kayıp eşyaların takibi ve sahiplerine teslimi amacıyla geliştirilmiştir. 
+                            Toplanan veriler yalnızca bu amaç doğrultusunda kullanılır ve üçüncü taraflarla paylaşılmaz.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">2. Toplanan Bilgiler</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>Kayıp eşya bilgileri (ad, açıklama, bulunma tarihi)</li>
+                            <li>Lokasyon ve araç bilgileri</li>
+                            <li>Bulan kişi bilgileri</li>
+                            <li>Sistem kullanıcı bilgileri</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">3. Veri Güvenliği</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Tüm veriler güvenli sunucularda saklanır ve yetkisiz erişime karşı korunur. 
+                            Sistem düzenli olarak güvenlik güncellemeleri alır.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">4. İletişim</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Gizlilik politikası ile ilgili sorularınız için IETT müşteri hizmetleri ile iletişime geçebilirsiniz.
+                        </p>
+                    </section>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <p class="text-sm text-gray-500">
+                        Son güncelleme: @DateTime.Now.ToString("dd MMMM yyyy")
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,405 @@
+@model IEnumerable<LostAndFoundApp.Models.LostItem>
+
+@{
+    ViewData["Title"] = "Kayıp Eşyalar";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Kayıp Eşyalar</h1>
+                <p class="mt-2 text-gray-600">Sisteme kayıtlı tüm kayıp eşyaları görüntüleyin ve yönetin</p>
+            </div>
+            <a asp-action="Create" class="btn-primary">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Yeni Kayıp Eşya
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Search and Filter Section -->
+<div class="container mx-auto px-4 py-4">
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <form asp-action="Index" method="get" class="space-y-4 lg:space-y-0 lg:flex lg:items-end lg:space-x-4">
+            <!-- Eşya Adı Arama -->
+            <div class="flex-1">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Eşya Ara</label>
+                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                       placeholder="Eşya adı veya açıklama..." />
+            </div>
+            
+            <!-- Durum Filtresi -->
+            <div class="lg:w-48">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Durum</label>
+                <div class="custom-select-container">
+                    <div class="custom-select" id="statusSelect">
+                        <div class="custom-select-trigger">
+                            <span id="statusSelectText">Tüm Durumlar</span>
+                            <svg class="custom-select-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="custom-select-options" id="statusOptions">
+                            <div class="custom-select-search">
+                                <input type="text" id="statusSearch" placeholder="Durum ara..." />
+                            </div>
+                            <div class="custom-option" data-value="" data-text="Tüm Durumlar">Tüm Durumlar</div>
+                            <div class="custom-option" data-value="TeslimEdilmedi" data-text="Teslim Edilmedi">Teslim Edilmedi</div>
+                            <div class="custom-option" data-value="TeslimEdildi" data-text="Teslim Edildi">Teslim Edildi</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="statusFilter" id="statusFilterInput" value="@ViewData["CurrentStatus"]" />
+                </div>
+            </div>
+            
+            <!-- Hat Kodu Filtresi -->
+            <div class="lg:w-48">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Hat Kodu</label>
+                <div class="custom-select-container">
+                    <div class="custom-select" id="lineCodeSelect">
+                        <div class="custom-select-trigger">
+                            <span id="lineCodeSelectText">Tüm Hat Kodları</span>
+                            <svg class="custom-select-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="custom-select-options" id="lineCodeOptions">
+                            <div class="custom-select-search">
+                                <input type="text" id="lineCodeSearch" placeholder="Hat kodu ara..." />
+                            </div>
+                            <div class="custom-option" data-value="" data-text="Tüm Hat Kodları">Tüm Hat Kodları</div>
+                            @if(ViewBag.LineCodes != null)
+                            {
+                                @foreach(var lineCode in ViewBag.LineCodes)
+                                {
+                                    <div class="custom-option" data-value="@lineCode.Id" data-text="@lineCode.Line">@lineCode.Line</div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <input type="hidden" name="lineCodeFilter" id="lineCodeFilterInput" value="@ViewData["CurrentLineCode"]" />
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit" class="btn-primary w-full lg:w-auto">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    Ara
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto px-4 pb-8">
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            ID
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Eşya Adı
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Açıklama
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Bulunma Tarihi
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Hat Kodu
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Durum
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Bulan Kişi
+                        </th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            İşlemler
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                @Html.DisplayFor(modelItem => item.ItemName)
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900 max-w-xs truncate">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                @Html.DisplayFor(modelItem => item.FoundDate)
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                @(item.LineCode?.Line ?? "Belirtilmemiş")
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if(item.Status == LostAndFoundApp.Models.LostItemStatus.TeslimEdildi)
+                                {
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                        Teslim Edildi
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Teslim Edilmedi
+                                    </span>
+                                }
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                @Html.DisplayFor(modelItem => item.FoundBy)
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end space-x-2">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="text-blue-600 hover:text-blue-900">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                    </a>
+                                                                        <a asp-action="Edit" asp-route-id="@item.Id" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                        </svg>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-red-600 hover:text-red-900">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    @if ((int?)ViewData["TotalPages"] > 1)
+    {
+        <div class="mt-6 flex justify-center">
+            <nav class="flex items-center space-x-2">
+                @for (int i = 1; i <= (int)ViewData["TotalPages"]; i++)
+                {
+                    @if (i == (int?)ViewData["CurrentPage"])
+                    {
+                        <span class="px-3 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md">@i</span>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" asp-route-page="@i" class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">@i</a>
+                    }
+                }
+            </nav>
+        </div>
+    }
+</div>
+
+<!-- Custom Select Styles -->
+<style>
+.custom-select-container {
+    position: relative;
+}
+
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.custom-select-trigger:hover {
+    border-color: #9ca3af;
+}
+
+.custom-select.active .custom-select-trigger {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.custom-select-arrow {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s;
+}
+
+.custom-select.active .custom-select-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.custom-select.active .custom-select-options {
+    display: block;
+}
+
+.custom-select-search {
+    padding: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.custom-select-search input {
+    width: 100%;
+    padding: 0.375rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+.custom-select-search input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.custom-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.875rem;
+}
+
+.custom-option:hover {
+    background-color: #f3f4f6;
+}
+
+.custom-option.selected {
+    background-color: #6366f1;
+    color: white;
+}
+
+.custom-option.hidden {
+    display: none;
+}
+</style>
+
+<!-- Custom Select JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize custom selects
+    initCustomSelect('statusSelect', 'statusSelectText', 'statusOptions', 'statusFilterInput', 'statusSearch');
+    initCustomSelect('lineCodeSelect', 'lineCodeSelectText', 'lineCodeOptions', 'lineCodeFilterInput', 'lineCodeSearch');
+    
+    function initCustomSelect(selectId, textId, optionsId, inputId, searchId) {
+        const select = document.getElementById(selectId);
+        const selectText = document.getElementById(textId);
+        const options = document.getElementById(optionsId);
+        const hiddenInput = document.getElementById(inputId);
+        const searchInput = document.getElementById(searchId);
+        
+        if (!select || !selectText || !options || !hiddenInput || !searchInput) return;
+        
+        // Set initial value
+        const currentValue = hiddenInput.value;
+        if (currentValue) {
+            const currentOption = options.querySelector(`[data-value="${currentValue}"]`);
+            if (currentOption) {
+                selectText.textContent = currentOption.getAttribute('data-text');
+                currentOption.classList.add('selected');
+            }
+        }
+        
+        // Toggle dropdown
+        select.querySelector('.custom-select-trigger').addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeAllSelects();
+            select.classList.toggle('active');
+            if (select.classList.contains('active')) {
+                searchInput.focus();
+            }
+        });
+        
+        // Handle option selection
+        options.addEventListener('click', function(e) {
+            if (e.target.classList.contains('custom-option')) {
+                const value = e.target.getAttribute('data-value');
+                const text = e.target.getAttribute('data-text');
+                
+                // Update selected option
+                options.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+                e.target.classList.add('selected');
+                
+                // Update display and hidden input
+                selectText.textContent = text;
+                hiddenInput.value = value;
+                
+                // Close dropdown
+                select.classList.remove('active');
+            }
+        });
+        
+        // Handle search
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const allOptions = options.querySelectorAll('.custom-option');
+            
+            allOptions.forEach(option => {
+                const text = option.getAttribute('data-text').toLowerCase();
+                if (text.includes(searchTerm)) {
+                    option.classList.remove('hidden');
+                } else {
+                    option.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Prevent search input from closing dropdown
+        searchInput.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+    
+    // Close all selects when clicking outside
+    function closeAllSelects() {
+        document.querySelectorAll('.custom-select').forEach(select => {
+            select.classList.remove('active');
+        });
+    }
+    
+    document.addEventListener('click', closeAllSelects);
+});
+</script>

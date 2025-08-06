@@ -1,0 +1,310 @@
+@model IEnumerable<Location>
+
+@{
+    ViewData["Title"] = "Lokasyonlar";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">Lokasyonlar</h1>
+            <p class="mt-1 text-sm text-gray-600">Sistemdeki tüm lokasyonları görüntüleyin ve yönetin</p>
+        </div>
+        <a asp-action="Create" class="btn-primary">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Yeni Lokasyon Ekle
+        </a>
+    </div>
+</div>
+
+<!-- Data Table -->
+<div class="table-modern overflow-x-auto">
+    <table class="min-w-full">
+        <thead>
+            <tr>
+                <th class="text-left">Hat Kodu</th>
+                <th class="text-left">Kayıp Eşya</th>
+                <th class="text-left">Kapı Numarası</th>
+                <th class="text-right">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td class="font-medium text-gray-900">@item.LineCode?.Line</td>
+                    <td class="text-gray-600">@item.LostItem?.ItemName</td>
+                    <td class="text-gray-600">@item.KapiID</td>
+                    <td class="text-right">
+                        <div class="flex items-center justify-end space-x-2">
+                            <a asp-action="Details" asp-route-id="@item.Id" 
+                               class="text-blue-600 hover:text-blue-800 p-1 rounded" title="Detaylar">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </a>
+                            <button onclick="openEditModal(@item.Id, @item.LineCodeId, @item.LostItemId, '@item.KapiID')" 
+                                    class="text-green-600 hover:text-green-800 p-1 rounded" title="Düzenle">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                            </button>
+                            <button onclick="openDeleteModal(@item.Id, '@item.LineCode?.Line', '@item.LostItem?.ItemName', '@item.KapiID')" 
+                                    class="text-red-600 hover:text-red-800 p-1 rounded" title="Sil">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if ((int)ViewData["TotalPages"] > 1)
+{
+    <!-- Pagination -->
+    <div class="flex items-center justify-between mt-8">
+        <div class="text-sm text-gray-700">
+            Sayfa <span class="font-medium">@ViewData["CurrentPage"]</span> / <span class="font-medium">@ViewData["TotalPages"]</span>
+        </div>
+        <nav class="flex items-center space-x-1">
+            @if ((int)ViewData["CurrentPage"] > 1)
+            {
+                <a asp-action="Index" 
+                   asp-route-page="@((int)ViewData["CurrentPage"] - 1)"
+                   class="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Önceki
+                </a>
+            }
+
+            <div class="flex space-x-1">
+                @for (int i = 1; i <= (int)ViewData["TotalPages"]; i++)
+                {
+                    @if (i == (int)ViewData["CurrentPage"])
+                    {
+                        <span class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-md">
+                            @i
+                        </span>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" 
+                           asp-route-page="@i"
+                           class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                            @i
+                        </a>
+                    }
+                }
+            </div>
+
+            @if ((int)ViewData["CurrentPage"] < (int)ViewData["TotalPages"])
+            {
+                <a asp-action="Index" 
+                   asp-route-page="@((int)ViewData["CurrentPage"] + 1)"
+                   class="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700">
+                    Sonraki
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            }
+        </nav>
+    </div>
+}
+
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Lokasyon Düzenle</h3>
+                <button onclick="closeEditModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form id="editForm" method="post">
+                <input type="hidden" id="editId" name="Id" />
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="form-group">
+                        <label for="editLineCodeId" class="form-label">Hat Kodu</label>
+                        <select id="editLineCodeId" name="LineCodeId" class="form-input" required>
+                            <option value="">Hat Kodu 31aSeçin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLostItemId" class="form-label">Kayıp Eşya</label>
+                        <select id="editLostItemId" name="LostItemId" class="form-input" required>
+                            <option value="">Kayıp Eşya Seçin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editKapiID" class="form-label">Kapı Numarası</label>
+                        <input type="text" id="editKapiID" name="KapiID" class="form-input" required />
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <button type="button" onclick="closeEditModal()" class="btn-secondary">
+                        İptal
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Güncelle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Lokasyon Sil</h3>
+                <button onclick="closeDeleteModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Warning -->
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                    <div>
+                        <h4 class="text-sm font-semibold text-red-800">Silmek İstediğinizden Emin Misiniz?</h4>
+                        <p class="text-red-700 text-sm mt-1">Bu işlem geri alınamaz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Details -->
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <h4 class="font-medium text-gray-900 mb-3">Silinecek Lokasyon:</h4>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <span class="text-gray-600">Lokasyon Adı:</span>
+                        <span id="deleteName" class="font-medium text-gray-900 ml-2"></span>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">Tip:</span>
+                        <span id="deleteType" class="font-medium text-gray-900 ml-2"></span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="deleteForm" method="post" action="@Url.Action("DeleteAjax")">
+                <input type="hidden" id="deleteId" name="Id" />
+                @Html.AntiForgeryToken()
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeDeleteModal()" class="btn-secondary">
+                        İptal
+                    </button>
+                    <button type="button" onclick="submitDeleteForm()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium transition-colors duration-200 flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Sil
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openEditModal(id, name, type) {
+        document.getElementById('editId').value = id;
+        document.getElementById('editName').value = name;
+        document.getElementById('editType').value = type || '';
+        
+        document.getElementById('editForm').action = '@Url.Action("Edit")/' + id;
+        document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.add('hidden');
+    }
+
+    function openDeleteModal(id, name, type) {
+        document.getElementById('deleteId').value = id;
+        document.getElementById('deleteName').textContent = name;
+        document.getElementById('deleteType').textContent = type || '-';
+        
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
+    
+    function submitDeleteForm() {
+        const id = document.getElementById('deleteId').value;
+        const token = document.querySelector('#deleteForm input[name="__RequestVerificationToken"]').value;
+        
+        $.ajax({
+            url: '@Url.Action("DeleteAjax")/' + id,
+            type: 'POST',
+            data: {
+                '__RequestVerificationToken': token
+            },
+            success: function(response) {
+                if (response.success) {
+                    closeDeleteModal();
+                    
+                    // Check if we need to redirect to previous page
+                    const currentPage = @ViewData["CurrentPage"] || 1;
+                    const itemsOnCurrentPage = document.querySelectorAll('tbody tr').length;
+                    
+                    // If we're deleting the last item on a page that's not page 1
+                    if (itemsOnCurrentPage === 1 && currentPage > 1) {
+                        window.location.href = '@Url.Action("Index")?page=' + (currentPage - 1);
+                    } else {
+                        window.location.reload();
+                    }
+                } else {
+                    alert('Hata: ' + response.message);
+                }
+            },
+            error: function() {
+                alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+            }
+        });
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+        const editModal = document.getElementById('editModal');
+        const deleteModal = document.getElementById('deleteModal');
+        
+        if (event.target === editModal) {
+            closeEditModal();
+        }
+        if (event.target === deleteModal) {
+            closeDeleteModal();
+        }
+    }
+</script>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+}

@@ -1,0 +1,325 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/obj/Debug/net8.0/scopedcss/projectbundle/LostAndFoundApp.bundle.scp.css",
+      "PackagePath": "staticwebassets/LostAndFoundApp.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/galata.jpg",
+      "PackagePath": "staticwebassets/images/galata.jpg"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/ibb.jpeg",
+      "PackagePath": "staticwebassets/images/ibb.jpeg"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/iett.jpeg",
+      "PackagePath": "staticwebassets/images/iett.jpeg"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/iett1.png",
+      "PackagePath": "staticwebassets/images/iett1.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/0df5c809c339f8c94742b5c69154dc665b9b88cb.png",
+      "PackagePath": "staticwebassets/images/login/0df5c809c339f8c94742b5c69154dc665b9b88cb.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/18f60619-77c2-42e9-bb7b-941fba168e90.png",
+      "PackagePath": "staticwebassets/images/login/18f60619-77c2-42e9-bb7b-941fba168e90.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/46557767-63d3-4e38-aab4-22ac248a38a9.png",
+      "PackagePath": "staticwebassets/images/login/46557767-63d3-4e38-aab4-22ac248a38a9.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/52f6b9f3-9ccd-4464-9c20-a170e694430d.png",
+      "PackagePath": "staticwebassets/images/login/52f6b9f3-9ccd-4464-9c20-a170e694430d.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/744a02eb-2a5c-4add-8214-75f1abb1bfa7.png",
+      "PackagePath": "staticwebassets/images/login/744a02eb-2a5c-4add-8214-75f1abb1bfa7.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/8bd7e51c69542687ab1094868965bac8a234b62f.png",
+      "PackagePath": "staticwebassets/images/login/8bd7e51c69542687ab1094868965bac8a234b62f.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/8fe15c9c-1620-4b79-861e-fb9b8f531e3f.png",
+      "PackagePath": "staticwebassets/images/login/8fe15c9c-1620-4b79-861e-fb9b8f531e3f.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/9b956c5c-f8ba-4e73-abb9-57e2ab22b19f.png",
+      "PackagePath": "staticwebassets/images/login/9b956c5c-f8ba-4e73-abb9-57e2ab22b19f.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/b0f6ff45dea2c80375cc66e3e019a5e5bf7f64f8.png",
+      "PackagePath": "staticwebassets/images/login/b0f6ff45dea2c80375cc66e3e019a5e5bf7f64f8.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/login/c11c2b29-bf8a-491e-824a-ef6a53469b34.png",
+      "PackagePath": "staticwebassets/images/login/c11c2b29-bf8a-491e-824a-ef6a53469b34.png"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/images/seperator.jpeg",
+      "PackagePath": "staticwebassets/images/seperator.jpeg"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/js/site.js",
+      "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/LICENSE",
+      "PackagePath": "staticwebassets/lib/bootstrap"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation/LICENSE.md",
+      "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery/dist/jquery.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/Users/emrefurkanbalkan/LostAndFoundApp/wwwroot/lib/jquery/dist/jquery.min.map",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.LostAndFoundApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.LostAndFoundApp.props",
+      "PackagePath": "build\\LostAndFoundApp.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.LostAndFoundApp.props",
+      "PackagePath": "buildMultiTargeting\\LostAndFoundApp.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.LostAndFoundApp.props",
+      "PackagePath": "buildTransitive\\LostAndFoundApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

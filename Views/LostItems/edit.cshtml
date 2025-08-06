@@ -1,0 +1,371 @@
+@model LostAndFoundApp.Models.LostItem
+
+@{
+    ViewData["Title"] = "Kayıp Eşya Düzenle";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold text-gray-900">Kayıp Eşya Düzenle</h1>
+        <p class="mt-2 text-gray-600">Kayıp eşya bilgilerini güncelleyin</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <form asp-action="Edit" class="space-y-8">
+            <input type="hidden" asp-for="Id" />
+            
+            <!-- Model State Errors -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="flex">
+                        <svg class="w-5 h-5 text-red-400 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div>
+                            <h3 class="text-sm font-medium text-red-800">Lütfen aşağıdaki hataları düzeltin:</h3>
+                            <div asp-validation-summary="ModelOnly" class="mt-2 text-sm text-red-700"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Eşya Bilgileri -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 space-y-6">
+                <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                    Eşya Bilgileri
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label asp-for="ItemName" class="form-label">Eşya Adı</label>
+                        <input asp-for="ItemName" class="form-input" placeholder="Eşya adını girin" />
+                        <span asp-validation-for="ItemName" class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FoundDate" class="form-label">Bulunma Tarihi</label>
+                        <input asp-for="FoundDate" class="form-input" type="datetime-local" />
+                        <span asp-validation-for="FoundDate" class="form-error"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Description" class="form-label">Açıklama</label>
+                    <textarea asp-for="Description" class="form-input" rows="3" placeholder="Eşya hakkında detaylı açıklama"></textarea>
+                    <span asp-validation-for="Description" class="form-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Status" class="form-label">Durum</label>
+                    <div class="custom-select-container">
+                        <div class="custom-select" id="statusSelect">
+                            <div class="custom-select-trigger">
+                                <span id="statusSelectText">@(Model.Status == LostAndFoundApp.Models.LostItemStatus.TeslimEdildi ? "Teslim Edildi" : "Teslim Edilmedi")</span>
+                                <svg class="custom-select-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                            <div class="custom-select-options" id="statusOptions">
+                                <div class="custom-select-search">
+                                    <input type="text" id="statusSearch" placeholder="Durum ara..." />
+                                </div>
+                                <div class="custom-option @(Model.Status == LostAndFoundApp.Models.LostItemStatus.TeslimEdilmedi ? "selected" : "")" data-value="TeslimEdilmedi" data-text="Teslim Edilmedi">Teslim Edilmedi</div>
+                                <div class="custom-option @(Model.Status == LostAndFoundApp.Models.LostItemStatus.TeslimEdildi ? "selected" : "")" data-value="TeslimEdildi" data-text="Teslim Edildi">Teslim Edildi</div>
+                            </div>
+                        </div>
+                        <input asp-for="Status" type="hidden" id="statusInput" />
+                    </div>
+                    <span asp-validation-for="Status" class="form-error"></span>
+                </div>
+            </div>
+
+            <!-- Lokasyon Bilgileri -->
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 space-y-6">
+                <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Lokasyon Bilgileri
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label asp-for="LineCodeId" class="form-label">Hat Kodu</label>
+                        <div class="custom-select-container">
+                            <div class="custom-select" id="lineCodeSelect">
+                                <div class="custom-select-trigger">
+                                    <span id="lineCodeSelectText">@(Model.LineCode?.Line ?? "Hat Kodu Seçiniz")</span>
+                                    <svg class="custom-select-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                <div class="custom-select-options" id="lineCodeOptions">
+                                    <div class="custom-select-search">
+                                        <input type="text" id="lineCodeSearch" placeholder="Hat kodu ara..." />
+                                    </div>
+                                    @if(ViewData["LineCodeId"] is SelectList lineCodes)
+                                    {
+                                        @foreach(var lineCode in lineCodes)
+                                        {
+                                            <div class="custom-option @(lineCode.Selected ? "selected" : "")" data-value="@lineCode.Value" data-text="@lineCode.Text">@lineCode.Text</div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <input asp-for="LineCodeId" type="hidden" id="lineCodeInput" />
+                        </div>
+                        <span asp-validation-for="LineCodeId" class="form-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Location" class="form-label">Araç Kapı Numarası</label>
+                        <input asp-for="Location" class="form-input" placeholder="Araç kapı numarasını girin" />
+                        <span asp-validation-for="Location" class="form-error"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulan Kişi Bilgileri -->
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 space-y-6">
+                <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Bulan Kişi Bilgileri
+                </h3>
+                
+                <div class="form-group">
+                    <label asp-for="FoundBy" class="form-label">Bulan Kişi</label>
+                    <input asp-for="FoundBy" class="form-input" placeholder="Bulan kişinin adı soyadı" />
+                    <span asp-validation-for="FoundBy" class="form-error"></span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                <button type="submit" class="btn-primary flex-1 sm:flex-none">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Güncelle
+                </button>
+                <a asp-action="Index" class="btn-secondary flex-1 sm:flex-none text-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    İptal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Custom Select Styles -->
+<style>
+.custom-select-container {
+    position: relative;
+}
+
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 42px;
+}
+
+.custom-select-trigger:hover {
+    border-color: #9ca3af;
+}
+
+.custom-select.active .custom-select-trigger {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.custom-select-arrow {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s;
+}
+
+.custom-select.active .custom-select-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.custom-select.active .custom-select-options {
+    display: block;
+}
+
+.custom-select-search {
+    padding: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.custom-select-search input {
+    width: 100%;
+    padding: 0.375rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+.custom-select-search input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.custom-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.875rem;
+}
+
+.custom-option:hover {
+    background-color: #f3f4f6;
+}
+
+.custom-option.selected {
+    background-color: #6366f1;
+    color: white;
+}
+
+.custom-option.hidden {
+    display: none;
+}
+</style>
+
+<!-- Custom Select JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize custom selects
+    initCustomSelect('statusSelect', 'statusSelectText', 'statusOptions', 'statusInput', 'statusSearch');
+    initCustomSelect('lineCodeSelect', 'lineCodeSelectText', 'lineCodeOptions', 'lineCodeInput', 'lineCodeSearch');
+    
+    // Set initial values
+    const statusInput = document.getElementById('statusInput');
+    const lineCodeInput = document.getElementById('lineCodeInput');
+    
+    if (statusInput && statusInput.value) {
+        const selectedStatusOption = document.querySelector(`#statusOptions .custom-option[data-value="${statusInput.value}"]`);
+        if (selectedStatusOption) {
+            selectedStatusOption.classList.add('selected');
+        }
+    }
+    
+    if (lineCodeInput && lineCodeInput.value) {
+        const selectedLineCodeOption = document.querySelector(`#lineCodeOptions .custom-option[data-value="${lineCodeInput.value}"]`);
+        if (selectedLineCodeOption) {
+            selectedLineCodeOption.classList.add('selected');
+        }
+    }
+    
+    function initCustomSelect(selectId, textId, optionsId, inputId, searchId) {
+        const select = document.getElementById(selectId);
+        const selectText = document.getElementById(textId);
+        const options = document.getElementById(optionsId);
+        const hiddenInput = document.getElementById(inputId);
+        const searchInput = document.getElementById(searchId);
+        
+        if (!select || !selectText || !options || !hiddenInput || !searchInput) return;
+        
+        // Toggle dropdown
+        select.querySelector('.custom-select-trigger').addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeAllSelects();
+            select.classList.toggle('active');
+            if (select.classList.contains('active')) {
+                searchInput.focus();
+            }
+        });
+        
+        // Handle option selection
+        options.addEventListener('click', function(e) {
+            if (e.target.classList.contains('custom-option')) {
+                const value = e.target.getAttribute('data-value');
+                const text = e.target.getAttribute('data-text');
+                
+                // Update selected option
+                options.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+                e.target.classList.add('selected');
+                
+                // Update display and hidden input
+                selectText.textContent = text;
+                hiddenInput.value = value;
+                
+                // Close dropdown
+                select.classList.remove('active');
+            }
+        });
+        
+        // Handle search
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const allOptions = options.querySelectorAll('.custom-option');
+            
+            allOptions.forEach(option => {
+                const text = option.getAttribute('data-text').toLowerCase();
+                if (text.includes(searchTerm)) {
+                    option.classList.remove('hidden');
+                } else {
+                    option.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Prevent search input from closing dropdown
+        searchInput.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+    
+    // Close all selects when clicking outside
+    function closeAllSelects() {
+        document.querySelectorAll('.custom-select').forEach(select => {
+            select.classList.remove('active');
+        });
+    }
+    
+    document.addEventListener('click', closeAllSelects);
+});
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
