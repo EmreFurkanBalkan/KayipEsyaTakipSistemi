@@ -36,7 +36,5 @@ namespace LostAndFoundApp.Models
 
         [Display(Name = "Bulan Kişi")]
         public string FoundBy { get; set; }
-        
-        public ICollection<Location>? Locations { get; set; }
     }
 }

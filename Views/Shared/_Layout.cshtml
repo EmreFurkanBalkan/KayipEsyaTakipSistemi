@@ -60,10 +60,15 @@
                     @if (Context.Session.GetString("UserRole") == "Admin")
                     {
                         <a class="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium transition-colors" 
-                           asp-controller="Kullanici" asp-action="Index">Kullanıcılar</a>
+                           asp-controller="Users" asp-action="Index">Kullanıcılar</a>
                     }
                     <a class="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium transition-colors" 
                        asp-controller="LineCodes" asp-action="Index">Hatlar</a>
+                    @if (Context.Session.GetString("UserRole") == "Admin" || Context.Session.GetString("UserRole") == "Moderatör")
+                    {
+                        <a class="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium transition-colors" 
+                           asp-controller="Logs" asp-action="Index">Sistem Logları</a>
+                    }
                     
                     @if (Context.Session.GetString("UserName") != null)
                     {
@@ -126,12 +131,10 @@
                 @if (Context.Session.GetString("UserRole") == "Admin")
                 {
                     <a class="block text-white hover:text-gray-200 px-3 py-2 text-sm font-medium" 
-                       asp-controller="Kullanici" asp-action="Index">Kullanıcılar</a>
+                       asp-controller="Users" asp-action="Index">Kullanıcılar</a>
                 }
                 <a class="block text-white hover:text-gray-200 px-3 py-2 text-sm font-medium" 
-                   asp-controller="Vehicles" asp-action="Index">Araçlar</a>
-                <a class="block text-white hover:text-gray-200 px-3 py-2 text-sm font-medium" 
-                   asp-controller="Locations" asp-action="Index">Lokasyonlar</a>
+                   asp-controller="LineCodes" asp-action="Index">Hatlar</a>
                 
                 @if (Context.Session.GetString("UserName") != null)
                 {

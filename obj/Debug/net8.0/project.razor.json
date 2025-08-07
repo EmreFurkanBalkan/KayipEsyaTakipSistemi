@@ -19344,38 +19344,13 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Kullanici/Index.cshtml",
-      "TargetPath": "Views\\Kullanici\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Locations/Edit.cshtml",
-      "TargetPath": "Views\\Locations\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Kullanici/Edit.cshtml",
-      "TargetPath": "Views\\Kullanici\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Account/Login.cshtml",
       "TargetPath": "Views\\Account\\Login.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Vehicles/Delete.cshtml",
-      "TargetPath": "Views\\Vehicles\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/LostItems/edit.cshtml",
       "TargetPath": "Views\\LostItems\\edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Kullanici/Details.cshtml",
-      "TargetPath": "Views\\Kullanici\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -19394,23 +19369,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Locations/Delete.cshtml",
-      "TargetPath": "Views\\Locations\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Vehicles/Details.cshtml",
-      "TargetPath": "Views\\Vehicles\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Shared/_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Kullanici/Delete.cshtml",
-      "TargetPath": "Views\\Kullanici\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -19434,11 +19394,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Vehicles/Edit.cshtml",
-      "TargetPath": "Views\\Vehicles\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Users/Create.cshtml",
       "TargetPath": "Views\\Users\\Create.cshtml",
       "FileKind": "mvc"
@@ -19449,33 +19404,18 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Vehicles/Index.cshtml",
-      "TargetPath": "Views\\Vehicles\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/LineCodes/Edit.cshtml",
       "TargetPath": "Views\\LineCodes\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Locations/Create.cshtml",
-      "TargetPath": "Views\\Locations\\Create.cshtml",
+      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Logs/Index.cshtml",
+      "TargetPath": "Views\\Logs\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
       "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Kullanici/Create.cshtml",
-      "TargetPath": "Views\\Kullanici\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Vehicles/Create.cshtml",
-      "TargetPath": "Views\\Vehicles\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -19496,16 +19436,6 @@
     {
       "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Users/Details.cshtml",
       "TargetPath": "Views\\Users\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Locations/Index.cshtml",
-      "TargetPath": "Views\\Locations\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/emrefurkanbalkan/LostAndFoundApp/Views/Locations/Details.cshtml",
-      "TargetPath": "Views\\Locations\\Details.cshtml",
       "FileKind": "mvc"
     },
     {

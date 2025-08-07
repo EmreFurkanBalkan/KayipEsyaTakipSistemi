@@ -60,7 +60,7 @@
 <!-- Quick Actions -->
 <div class="mb-12">
     <h2 class="text-2xl font-bold text-gray-900 mb-6">Hızlı İşlemler</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="card-modern p-6 text-center">
             <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,25 +75,12 @@
         <div class="card-modern p-6 text-center">
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Araçlar</h3>
-            <p class="text-gray-600 mb-4">Kayıp eşyaların bulunduğu otobüs bilgilerine ulaşın</p>
-            <a class="btn-primary-modern" asp-controller="Vehicles" asp-action="Index">Görüntüle</a>
-        </div>
-        
-        <div class="card-modern p-6 text-center">
-            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Lokasyonlar</h3>
-            <p class="text-gray-600 mb-4">Kayıp eşyaların teslim edildiği yerleri inceleyin</p>
-            <a class="btn-primary-modern" asp-controller="Locations" asp-action="Index">Görüntüle</a>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Hat Kodları</h3>
+            <p class="text-gray-600 mb-4">Otobüs hatlarını ve kodlarını görüntüleyin ve yönetin</p>
+            <a class="btn-primary-modern" asp-controller="LineCodes" asp-action="Index">Görüntüle</a>
         </div>
     </div>
 </div>
@@ -101,14 +88,50 @@
 <!-- Recent Activity -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
     <h2 class="text-xl font-semibold text-gray-900 mb-4">Son Aktiviteler</h2>
-    <div class="space-y-4">
-        <!-- Bu kısım controller'dan gelen verilerle doldurulacak -->
-        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-            <div class="flex-1">
-                <p class="text-sm font-medium text-gray-900">Yeni kayıp eşya eklendi</p>
-                <p class="text-xs text-gray-500">2 saat önce</p>
+    <div class="max-h-96 overflow-y-auto space-y-4">
+        @if (ViewBag.RecentActivities != null && ((List<LostAndFoundApp.Models.Logs>)ViewBag.RecentActivities).Any())
+        {
+            @foreach (var activity in (List<LostAndFoundApp.Models.Logs>)ViewBag.RecentActivities)
+            {
+                <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                    @{
+                        string bgColor = "bg-blue-500";
+                        string textColor = "bg-blue-100 text-blue-800";
+                        string displayType = activity.LogType;
+                        
+                        switch (activity.LogType.ToUpper())
+                        {
+                            case "CREATE":
+                                bgColor = "bg-blue-500";
+                                textColor = "bg-blue-100 text-blue-800";
+                                displayType = "Oluşturma";
+                                break;
+                            case "UPDATE":
+                                bgColor = "bg-yellow-500";
+                                textColor = "bg-yellow-100 text-yellow-800";
+                                displayType = "Güncelleme";
+                                break;
+                            case "DELETE":
+                                bgColor = "bg-red-500";
+                                textColor = "bg-red-100 text-red-800";
+                                displayType = "Silme";
+                                break;
+                        }
+                    }
+                    <div class="w-2 h-2 @bgColor rounded-full"></div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-900">@activity.LogContent</p>
+                        <p class="text-xs text-gray-500">@activity.Executor - @activity.CreatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+                    </div>
+                    <span class="px-2 py-1 text-xs rounded-full @textColor">@displayType</span>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center py-8">
+                <p class="text-gray-500">Henüz aktivite bulunmuyor.</p>
             </div>
-        </div>
+        }
     </div>
 </div>

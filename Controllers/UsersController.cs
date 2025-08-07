@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LostAndFoundApp.Models;
+using LostAndFoundApp.Services;
 
 namespace LostAndFoundApp.Controllers
 {
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly LogService _logService;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context, LogService logService)
         {
             _context = context;
+            _logService = logService;
         }
 
         // GET: Users
@@ -63,12 +66,17 @@ namespace LostAndFoundApp.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,Password")] User user)
+        public async Task<IActionResult> Create([Bind("UserName,Password,Rol")] User user)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
+                
+                // Log kaydı
+                var currentUser = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                await _logService.LogAsync("CREATE", currentUser, $"Yeni kullanıcı oluşturuldu: {user.UserName} ({user.Rol})");
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -93,7 +101,7 @@ namespace LostAndFoundApp.Controllers
         // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Password")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Password,Rol")] User user)
         {
             if (id != user.Id)
             {
@@ -106,6 +114,10 @@ namespace LostAndFoundApp.Controllers
                 {
                     _context.Update(user);
                     await _context.SaveChangesAsync();
+                    
+                    // Log kaydı
+                    var currentUser = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                    await _logService.LogAsync("UPDATE", currentUser, $"Kullanıcı güncellendi: {user.UserName} ({user.Rol})");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -149,8 +161,15 @@ namespace LostAndFoundApp.Controllers
             var user = await _context.Users.FindAsync(id);
             if (user != null)
             {
+                var userName = user.UserName;
+                var userRole = user.Rol;
+                
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
+                
+                // Log kaydı
+                var currentUser = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                await _logService.LogAsync("DELETE", currentUser, $"Kullanıcı silindi: {userName} ({userRole})");
             }
             return RedirectToAction(nameof(Index));
         }

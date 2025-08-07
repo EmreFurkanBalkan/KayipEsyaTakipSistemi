@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LostAndFoundApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250806140048_RemoveAdSoyadSifreFromUsers")]
+    partial class RemoveAdSoyadSifreFromUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
@@ -83,35 +86,6 @@ namespace LostAndFoundApp.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LostAndFoundApp.Models.Logs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Executor")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LogContent")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LogType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Logs");
-                });
-
             modelBuilder.Entity("LostAndFoundApp.Models.LostItem", b =>
                 {
                     b.Property<int>("Id")
@@ -179,36 +153,36 @@ namespace LostAndFoundApp.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "Admin123",
+                            Password = "admin123",
                             Rol = "Admin",
                             UserName = "admin"
                         },
                         new
                         {
                             Id = 2,
-                            Password = "Password1",
-                            Rol = "Moderatör",
+                            Password = "password1",
+                            Rol = "Kullanıcı",
                             UserName = "user1"
                         },
                         new
                         {
                             Id = 3,
-                            Password = "Password2",
-                            Rol = "Moderatör",
+                            Password = "password2",
+                            Rol = "Kullanıcı",
                             UserName = "user2"
                         },
                         new
                         {
                             Id = 4,
-                            Password = "Test123",
+                            Password = "test123",
                             Rol = "Moderatör",
                             UserName = "test"
                         },
                         new
                         {
                             Id = 5,
-                            Password = "Demo123",
-                            Rol = "Moderatör",
+                            Password = "demo123",
+                            Rol = "Kullanıcı",
                             UserName = "demo"
                         });
                 });

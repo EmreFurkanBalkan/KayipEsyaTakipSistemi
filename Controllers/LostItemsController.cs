@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LostAndFoundApp.Models;
+using LostAndFoundApp.Services;
 
 namespace LostAndFoundApp.Controllers
 {
     public class LostItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly LogService _logService;
 
-        public LostItemsController(ApplicationDbContext context)
+        public LostItemsController(ApplicationDbContext context, LogService logService)
         {
             _context = context;
+            _logService = logService;
         }
 
         // GET: LostItems
@@ -105,6 +108,11 @@ namespace LostAndFoundApp.Controllers
             {
                 _context.Add(lostItem);
                 await _context.SaveChangesAsync();
+                
+                // Log kaydı oluştur
+                var userName = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                await _logService.LogAsync("CREATE", userName, $"Yeni kayıp eşya oluşturuldu: {lostItem.ItemName} (Admin)");
+                
                 return RedirectToAction(nameof(Index));
             }
 
@@ -146,6 +154,10 @@ namespace LostAndFoundApp.Controllers
                 {
                     _context.Update(lostItem);
                     await _context.SaveChangesAsync();
+                    
+                    // Log kaydı oluştur
+                    var userName = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                    await _logService.LogAsync("UPDATE", userName, $"Kayıp eşya güncellendi: {lostItem.ItemName} (Admin)");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -192,8 +204,13 @@ namespace LostAndFoundApp.Controllers
             var lostItem = await _context.LostItems.FindAsync(id);
             if (lostItem != null)
             {
+                var itemName = lostItem.ItemName; // Silmeden önce adını al
                 _context.LostItems.Remove(lostItem);
                 await _context.SaveChangesAsync();
+                
+                // Log kaydı oluştur
+                var userName = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                await _logService.LogAsync("DELETE", userName, $"Kayıp eşya silindi: {itemName} (Admin)");
             }
             return RedirectToAction(nameof(Index));
         }
@@ -207,6 +224,11 @@ namespace LostAndFoundApp.Controllers
             {
                 _context.Add(lostItem);
                 await _context.SaveChangesAsync();
+                
+                // Log kaydı oluştur
+                var userName = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                await _logService.LogAsync("CREATE", userName, $"Yeni kayıp eşya oluşturuldu: {lostItem.ItemName} (Admin)");
+                
                 return Json(new { success = true, message = "Kayıp eşya başarıyla eklendi." });
             }
             
@@ -241,6 +263,11 @@ namespace LostAndFoundApp.Controllers
                 {
                     _context.Update(lostItem);
                     await _context.SaveChangesAsync();
+                    
+                    // Log kaydı oluştur
+                    var userName = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                    await _logService.LogAsync("UPDATE", userName, $"Kayıp eşya güncellendi: {lostItem.ItemName} (Admin)");
+                    
                     return Json(new { success = true, message = "Kayıp eşya başarıyla güncellendi." });
                 }
                 catch (DbUpdateConcurrencyException)
@@ -266,8 +293,14 @@ namespace LostAndFoundApp.Controllers
             var lostItem = await _context.LostItems.FindAsync(id);
             if (lostItem != null)
             {
+                var itemName = lostItem.ItemName; // Silmeden önce adını al
                 _context.LostItems.Remove(lostItem);
                 await _context.SaveChangesAsync();
+                
+                // Log kaydı oluştur
+                var userName = HttpContext.Session.GetString("UserName") ?? "Sistem";
+                await _logService.LogAsync("DELETE", userName, $"Kayıp eşya silindi: {itemName} (Admin)");
+                
                 return Json(new { success = true, message = "Kayıp eşya başarıyla silindi." });
             }
             return Json(new { success = false, message = "Kayıt bulunamadı." });

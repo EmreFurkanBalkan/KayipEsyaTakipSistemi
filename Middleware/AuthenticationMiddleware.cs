@@ -35,7 +35,7 @@ namespace LostAndFoundApp.Middleware
             }
             
             // Kullanıcılar sayfası sadece Admin'e özel
-            if (path != null && path.StartsWith("/kullanici") && userRole != "Admin")
+            if (path != null && path.StartsWith("/users") && userRole != "Admin")
             {
                 // Yetkisiz erişim - Ana sayfaya yönlendir
                 context.Response.Redirect("/Home/Index?error=unauthorized");

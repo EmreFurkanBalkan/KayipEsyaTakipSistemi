@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using LostAndFoundApp.Models;
 using LostAndFoundApp.Middleware;
+using LostAndFoundApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=lostitems.db"));
+
+// LogService'i ekle
+builder.Services.AddScoped<LogService>();
 
 // ✅ Session'ı build'den ÖNCE ekle!
 builder.Services.AddSession();

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using LostAndFoundApp.Attributes;
 
 namespace LostAndFoundApp.Models
 {
@@ -13,6 +14,11 @@ namespace LostAndFoundApp.Models
 
         [Required]
         [MaxLength(100)]
+        [PasswordValidation(ErrorMessage = "Şifre en az 6 karakter olmalı ve en az bir büyük harf içermelidir.")]
         public string Password { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Rol { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LostAndFoundApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250806135910_UpdateUserModelSimplified")]
+    partial class UpdateUserModelSimplified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
@@ -83,35 +86,6 @@ namespace LostAndFoundApp.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LostAndFoundApp.Models.Logs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Executor")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LogContent")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LogType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Logs");
-                });
-
             modelBuilder.Entity("LostAndFoundApp.Models.LostItem", b =>
                 {
                     b.Property<int>("Id")
@@ -156,6 +130,11 @@ namespace LostAndFoundApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AdSoyad")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -164,6 +143,11 @@ namespace LostAndFoundApp.Migrations
                     b.Property<string>("Rol")
                         .IsRequired()
                         .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Sifre")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UserName")
@@ -179,36 +163,46 @@ namespace LostAndFoundApp.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "Admin123",
+                            AdSoyad = "admin",
+                            Password = "admin123",
                             Rol = "Admin",
+                            Sifre = "admin123",
                             UserName = "admin"
                         },
                         new
                         {
                             Id = 2,
-                            Password = "Password1",
-                            Rol = "Moderatör",
+                            AdSoyad = "Ahmet Yılmaz",
+                            Password = "password1",
+                            Rol = "Kullanıcı",
+                            Sifre = "123456",
                             UserName = "user1"
                         },
                         new
                         {
                             Id = 3,
-                            Password = "Password2",
-                            Rol = "Moderatör",
+                            AdSoyad = "Mehmet Demir",
+                            Password = "password2",
+                            Rol = "Kullanıcı",
+                            Sifre = "password",
                             UserName = "user2"
                         },
                         new
                         {
                             Id = 4,
-                            Password = "Test123",
+                            AdSoyad = "Ayşe Kaya",
+                            Password = "test123",
                             Rol = "Moderatör",
+                            Sifre = "test123",
                             UserName = "test"
                         },
                         new
                         {
                             Id = 5,
-                            Password = "Demo123",
-                            Rol = "Moderatör",
+                            AdSoyad = "Fatma Özkan",
+                            Password = "demo123",
+                            Rol = "Kullanıcı",
+                            Sifre = "demo123",
                             UserName = "demo"
                         });
                 });
