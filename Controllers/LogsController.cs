@@ -17,9 +17,9 @@ namespace LostAndFoundApp.Controllers
         // GET: Logs
         public async Task<IActionResult> Index(string logType = "")
         {
-            // Role kontrolü
+            // Sadece Admin rolündeki kullanıcılar sistem loglarını görebilir
             var userRole = HttpContext.Session.GetString("UserRole");
-            if (userRole != "Admin" && userRole != "Moderatör")
+            if (userRole != "Admin")
             {
                 return RedirectToAction("Index", "Home");
             }

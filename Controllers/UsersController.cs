@@ -24,6 +24,13 @@ namespace LostAndFoundApp.Controllers
         // GET: Users
         public async Task<IActionResult> Index(int page = 1)
         {
+            // Sadece Admin rolündeki kullanıcılar kullanıcı listesini görebilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             int pageSize = 10;
 
             var totalItems = await _context.Users.CountAsync();
@@ -42,6 +49,13 @@ namespace LostAndFoundApp.Controllers
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            // Sadece Admin rolündeki kullanıcılar kullanıcı detaylarını görebilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -60,6 +74,13 @@ namespace LostAndFoundApp.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            // Sadece Admin rolündeki kullanıcılar yeni kullanıcı oluşturabilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -68,6 +89,13 @@ namespace LostAndFoundApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserName,Password,Rol")] User user)
         {
+            // Sadece Admin rolündeki kullanıcılar yeni kullanıcı oluşturabilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -85,6 +113,13 @@ namespace LostAndFoundApp.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            // Sadece Admin rolündeki kullanıcılar kullanıcı düzenleyebilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -103,6 +138,13 @@ namespace LostAndFoundApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Password,Rol")] User user)
         {
+            // Sadece Admin rolündeki kullanıcılar kullanıcı düzenleyebilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id != user.Id)
             {
                 return NotFound();
@@ -138,6 +180,13 @@ namespace LostAndFoundApp.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            // Sadece Admin rolündeki kullanıcılar kullanıcı silebilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -158,6 +207,13 @@ namespace LostAndFoundApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            // Sadece Admin rolündeki kullanıcılar kullanıcı silebilir
+            var currentUserRole = HttpContext.Session.GetString("UserRole");
+            if (currentUserRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var user = await _context.Users.FindAsync(id);
             if (user != null)
             {

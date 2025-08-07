@@ -21,6 +21,12 @@ namespace LostAndFoundApp.Controllers
         // GET: LineCodes
         public async Task<IActionResult> Index(int page = 1)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             int pageSize = 10;
 
             var totalItems = await _context.LineCodes.CountAsync();
@@ -39,6 +45,12 @@ namespace LostAndFoundApp.Controllers
         // GET: LineCodes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -57,6 +69,12 @@ namespace LostAndFoundApp.Controllers
         // GET: LineCodes/Create
         public IActionResult Create()
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -65,6 +83,12 @@ namespace LostAndFoundApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Line")] LineCode lineCode)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(lineCode);
@@ -77,6 +101,12 @@ namespace LostAndFoundApp.Controllers
         // GET: LineCodes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -95,6 +125,12 @@ namespace LostAndFoundApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Line")] LineCode lineCode)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id != lineCode.Id)
             {
                 return NotFound();
@@ -126,6 +162,12 @@ namespace LostAndFoundApp.Controllers
         // GET: LineCodes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -146,6 +188,12 @@ namespace LostAndFoundApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var lineCode = await _context.LineCodes.FindAsync(id);
             if (lineCode != null)
             {
@@ -160,6 +208,12 @@ namespace LostAndFoundApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAjax([Bind("Id,Line")] LineCode lineCode)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return Json(new { success = false, message = "Yetkisiz erişim." });
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(lineCode);
@@ -172,6 +226,12 @@ namespace LostAndFoundApp.Controllers
         [HttpPost]
         public async Task<IActionResult> EditAjax(int id, [Bind("Id,Line")] LineCode lineCode)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return Json(new { success = false, message = "Yetkisiz erişim." });
+            }
+
             if (id != lineCode.Id)
             {
                 return Json(new { success = false, message = "Geçersiz ID." });
@@ -203,6 +263,12 @@ namespace LostAndFoundApp.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteAjax(int id)
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return Json(new { success = false, message = "Yetkisiz erişim." });
+            }
+
             var lineCode = await _context.LineCodes.FindAsync(id);
             if (lineCode != null)
             {
@@ -216,6 +282,12 @@ namespace LostAndFoundApp.Controllers
         // API endpoint for getting line codes
         public async Task<IActionResult> GetLineCodes()
         {
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return Json(new { success = false, message = "Yetkisiz erişim." });
+            }
+
             var lineCodes = await _context.LineCodes
                 .Select(l => new { id = l.Id, line = l.Line })
                 .ToListAsync();
