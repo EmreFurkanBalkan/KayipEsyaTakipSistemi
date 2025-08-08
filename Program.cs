@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using LostAndFoundApp.Models;
 using LostAndFoundApp.Middleware;
 using LostAndFoundApp.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,13 +21,41 @@ builder.Services.AddScoped<LogService>();
 builder.Services.AddSession();
 
 // ✅ Authentication ve Authorization servislerini ekle
-builder.Services.AddAuthentication("Cookies")
-    .AddCookie("Cookies", options =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddCookie("Cookies", options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/Login";
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.LoginPath = "/Account/Login";
-        options.AccessDeniedPath = "/Account/Login";
-    });
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "LostAndFoundApp",
+        ValidAudience = "LostAndFoundApp",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("LostAndFoundApp_SecretKey_2024_VeryLongSecretKey123456789"))
+    };
+});
 builder.Services.AddAuthorization();
+
+// CORS politikası ekle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -39,6 +70,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// CORS middleware
+app.UseCors("AllowAll");
 
 // ✅ Session middleware burada kullanılmalı
 app.UseSession();

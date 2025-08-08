@@ -36,5 +36,11 @@ namespace LostAndFoundApp.Models
 
         [Display(Name = "Bulan Kişi")]
         public string FoundBy { get; set; }
+
+        [Display(Name = "Kullanıcı ID")]
+        public int UserId { get; set; }
+
+        [ValidateNever]
+        public User User { get; set; }
     }
 }

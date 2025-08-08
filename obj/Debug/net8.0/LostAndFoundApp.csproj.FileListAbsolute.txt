@@ -301,3 +301,4 @@
 /Users/emrefurkanbalkan/LostAndFoundApp/obj/Debug/net8.0/LostAndFoundApp.genruntimeconfig.cache
 /Users/emrefurkanbalkan/LostAndFoundApp/obj/Debug/net8.0/ref/LostAndFoundApp.dll
 /Users/emrefurkanbalkan/LostAndFoundApp/obj/Debug/net8.0/LostAndFoundApp.sourcelink.json
+/Users/emrefurkanbalkan/LostAndFoundApp/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
