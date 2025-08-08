@@ -16,8 +16,8 @@ namespace LostAndFoundApp.Middleware
         {
             var path = context.Request.Path.Value?.ToLower();
             
-            // Sadece login sayfasına erişim serbest
-            if (path != null && path.StartsWith("/account/login"))
+            // Login sayfası ve API endpoint'lerine erişim serbest
+            if (path != null && (path.StartsWith("/account/login") || path.StartsWith("/api/")))
             {
                 await _next(context);
                 return;
